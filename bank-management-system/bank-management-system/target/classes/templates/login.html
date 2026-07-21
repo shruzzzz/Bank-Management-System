@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign in — Ledger Bank</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="wrap narrow">
+    <div class="card">
+        <p class="page-sub" style="margin-bottom:2px; text-transform:uppercase; letter-spacing:0.08em; font-size:0.75rem; color:var(--brass); font-weight:600;">Ledger Bank</p>
+        <h1 class="page-title">Sign in</h1>
+        <p class="page-sub">Access your accounts and statements.</p>
+
+        <div th:if="${error}" class="alert alert-error" th:text="${error}"></div>
+        <div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
+
+        <form method="post" th:action="@{/login}">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required autofocus>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+        </form>
+
+        <p class="link-row">New here? <a th:href="@{/register}">Open an account</a></p>
+        <p class="link-row" style="margin-top:6px; font-size:0.8rem;">Demo login — username <b>demo</b>, password <b>demo123</b></p>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard — Ledger Bank</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="topbar">
+    <div class="brand"><span class="mark">L</span> Ledger Bank</div>
+    <nav>
+        <span th:text="${username}" style="opacity:0.7; margin-right: 4px;"></span>
+        <a th:href="@{/logout}">Log out</a>
+    </nav>
+</div>
+
+<div class="wrap">
+    <h1 class="page-title">Your accounts</h1>
+    <p class="page-sub">Everything you hold with us, in one place.</p>
+
+    <div th:if="${#lists.isEmpty(accounts)}" class="card empty-state">
+        No accounts found.
+    </div>
+
+    <div th:each="account : ${accounts}" class="card account-card">
+        <div>
+            <div class="acct-number" th:text="${account.accountNumber}"></div>
+            <div class="balance">
+                <small>$</small><span th:text="${#numbers.formatDecimal(account.balance, 1, 'COMMA', 2, 'POINT')}"></span>
+            </div>
+            <div class="acct-type" th:text="${account.accountType}"></div>
+        </div>
+        <div class="actions">
+            <a class="btn btn-primary" th:href="@{'/account/' + ${account.id} + '/deposit'}">Deposit</a>
+            <a class="btn btn-rust" th:href="@{'/account/' + ${account.id} + '/withdraw'}">Withdraw</a>
+            <a class="btn btn-outline" th:href="@{'/account/' + ${account.id} + '/transfer'}">Transfer</a>
+            <a class="btn btn-outline" th:href="@{'/account/' + ${account.id} + '/history'}">History</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

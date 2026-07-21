@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Statement — Ledger Bank</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="topbar">
+    <div class="brand"><span class="mark">L</span> Ledger Bank</div>
+    <nav><a th:href="@{/dashboard}">Dashboard</a><a th:href="@{/logout}">Log out</a></nav>
+</div>
+
+<div class="wrap">
+    <h1 class="page-title">Statement</h1>
+    <p class="page-sub" th:text="${account.accountNumber} + ' — running balance $' + ${#numbers.formatDecimal(account.balance, 1, 'COMMA', 2, 'POINT')}"></p>
+
+    <div class="card">
+        <div th:if="${#lists.isEmpty(transactions)}" class="empty-state">
+            No transactions yet. Once you deposit, withdraw, or transfer, entries will appear here.
+        </div>
+
+        <table th:unless="${#lists.isEmpty(transactions)}">
+            <thead>
+            <tr>
+                <th>Date</th>
+                <th>Type</th>
+                <th>Description</th>
+                <th>Amount</th>
+                <th>Balance after</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="tx : ${transactions}">
+                <td th:text="${#temporals.format(tx.timestamp, 'dd MMM yyyy, HH:mm')}"></td>
+                <td th:text="${tx.type}" th:class="'type-' + ${#strings.toLowerCase(tx.type)}"></td>
+                <td th:text="${tx.description}"></td>
+                <td th:text="'$' + ${#numbers.formatDecimal(tx.amount, 1, 'COMMA', 2, 'POINT')}"></td>
+                <td th:text="'$' + ${#numbers.formatDecimal(tx.balanceAfter, 1, 'COMMA', 2, 'POINT')}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <p class="link-row"><a th:href="@{/dashboard}">← Back to dashboard</a></p>
+</div>
+</body>
+</html>

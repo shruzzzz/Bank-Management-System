@@ -1,0 +1,267 @@
+/* ============================================
+   Ledger Bank — visual identity
+   Palette: ink navy, paper cream, ledger green, brass, rust (withdraw/error)
+   Type: Fraunces (display serif, ledger numerals) + Inter (body) + IBM Plex Mono (account numbers)
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap');
+
+:root {
+  --ink: #14213D;
+  --ink-soft: #2A3A5C;
+  --paper: #F7F3E9;
+  --paper-line: #E4DCC8;
+  --ledger-green: #1F6F5C;
+  --ledger-green-dark: #175646;
+  --brass: #B08D57;
+  --rust: #A6412B;
+  --text-main: #1C2333;
+  --text-muted: #5B6478;
+  --radius: 6px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  background-image:
+    repeating-linear-gradient(transparent, transparent 38px, var(--paper-line) 39px);
+  color: var(--text-main);
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+}
+
+.topbar {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 18px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 3px solid var(--brass);
+}
+
+.topbar .brand {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 1.4rem;
+  letter-spacing: 0.02em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.topbar .brand .mark {
+  width: 28px;
+  height: 28px;
+  border: 2px solid var(--brass);
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  color: var(--brass);
+  font-weight: 700;
+}
+
+.topbar nav a {
+  color: var(--paper);
+  text-decoration: none;
+  margin-left: 20px;
+  font-size: 0.92rem;
+  opacity: 0.85;
+  border-bottom: 1px solid transparent;
+  padding-bottom: 2px;
+}
+
+.topbar nav a:hover { opacity: 1; border-bottom-color: var(--brass); }
+
+.wrap {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 48px 24px 64px;
+}
+
+.wrap.narrow { max-width: 480px; }
+
+.page-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 2rem;
+  color: var(--ink);
+  margin: 0 0 4px;
+}
+
+.page-sub {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin: 0 0 32px;
+}
+
+/* ---- Passbook-style card ---- */
+.card {
+  background: #FFFDF8;
+  border: 1px solid var(--paper-line);
+  border-radius: var(--radius);
+  box-shadow: 0 1px 3px rgba(20, 33, 61, 0.06);
+  padding: 32px;
+  position: relative;
+}
+
+.card + .card { margin-top: 24px; }
+
+/* perforated ticket edge signature detail on account cards */
+.account-card {
+  border-left: 4px solid var(--ledger-green);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.account-card .acct-number {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.account-card .acct-type {
+  display: inline-block;
+  margin-top: 6px;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--brass);
+  font-weight: 600;
+}
+
+.balance {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 2.4rem;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.balance small {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  margin-right: 4px;
+}
+
+.actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+/* ---- Buttons ---- */
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid transparent;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+}
+
+.btn-primary { background: var(--ledger-green); color: #fff; }
+.btn-primary:hover { background: var(--ledger-green-dark); }
+
+.btn-outline { background: transparent; border-color: var(--ink-soft); color: var(--ink-soft); }
+.btn-outline:hover { background: var(--ink-soft); color: #fff; }
+
+.btn-rust { background: var(--rust); color: #fff; }
+.btn-rust:hover { background: #8a3320; }
+
+.btn-block { display: block; width: 100%; text-align: center; }
+
+/* ---- Forms ---- */
+label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+  margin: 18px 0 6px;
+}
+
+input, select {
+  width: 100%;
+  padding: 11px 13px;
+  border: 1px solid var(--paper-line);
+  border-radius: var(--radius);
+  font-size: 0.95rem;
+  font-family: 'Inter', sans-serif;
+  background: #FFFDF8;
+  color: var(--text-main);
+}
+
+input:focus, select:focus {
+  outline: 2px solid var(--ledger-green);
+  outline-offset: 1px;
+  border-color: var(--ledger-green);
+}
+
+form .btn { margin-top: 24px; }
+
+/* ---- Alerts ---- */
+.alert {
+  padding: 12px 16px;
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+}
+
+.alert-error { background: #FBEAE6; color: var(--rust); border: 1px solid #EAC2B8; }
+.alert-success { background: #E8F2EE; color: var(--ledger-green-dark); border: 1px solid #BFDCD1; }
+
+/* ---- Table (history) ---- */
+table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+th {
+  text-align: left;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  border-bottom: 2px solid var(--ink);
+  padding: 8px 10px;
+}
+td { padding: 10px; border-bottom: 1px solid var(--paper-line); font-family: 'IBM Plex Mono', monospace; font-size: 0.85rem; }
+td.type-deposit, td.type-transfer_in { color: var(--ledger-green-dark); }
+td.type-withdraw, td.type-transfer_out { color: var(--rust); }
+
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--text-muted);
+}
+
+.link-row { margin-top: 20px; font-size: 0.88rem; color: var(--text-muted); text-align: center; }
+.link-row a { color: var(--ledger-green-dark); font-weight: 600; text-decoration: none; }
+
+.stamp {
+  position: absolute;
+  top: 24px;
+  right: 28px;
+  border: 2px solid var(--brass);
+  color: var(--brass);
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  text-align: center;
+  transform: rotate(-8deg);
+  line-height: 1.1;
+  opacity: 0.8;
+}
